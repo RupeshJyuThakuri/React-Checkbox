@@ -11,15 +11,23 @@ const [inputs, setInputs] = useState({firstname:"", tomato:false, onion:false})
         setInputs(values => ({...values, [name]:value}))
     };
     const handleClick = (e) => {
-        
+        let fillings = ""
+        if(inputs.tomato) fillings += "Tomato"
+        if (inputs.onion) {
+            if (inputs.tomato) fillings += " and "
+            fillings += "Onion"
+        }
+        if (!fillings) fillings = "No fillings"
+        e.preventDefault()
+        alert(`${inputs.firstname} wants a burger with ${fillings}`)
     }
   return (
     <div className="flex w-screen h-screen items-center justify-center p-10">
-      <form onClick={handleClick}>
+      <form onSubmit={handleClick}>
         <label className="text-blue-800 font-bold">
           My name is:
           <input
-            className="mx-2 px-4 py-2 border border-gray-400 rounded-md outline-none"
+            className="mx-2 px-4 text-black py-2 border border-blue-400 rounded-md outline-none"
             type="text"
             name="firstname"
             value={inputs.firstname}
